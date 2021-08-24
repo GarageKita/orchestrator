@@ -6,6 +6,7 @@ const url = process.env.URL_3RD_PARTY_GARAGE_KITA;
 class EmailController{
     static async sendActivation(req, res, next) {
         // router.post('/email/sendactivation/:email', emailController.sendActivation)
+        console.log('masuk')
         let emailKirim = req.params.email
 
         try {
@@ -23,7 +24,7 @@ class EmailController{
     static async activatedAccount (req, res, next) {
         // router.get('/email/activation', emailController.activatedAccount)
         let activationCode = req.query.code;
-
+        console.log('masuk2')
         try {
             axios.get(url + '/email/activation/?code=' + activationCode)
             .then(({data, status}) => {

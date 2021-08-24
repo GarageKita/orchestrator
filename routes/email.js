@@ -8,7 +8,7 @@ const handlerGetSlash = (req, res) => {
 
 router.get('/', handlerGetSlash) 
 
-router.post('/email/sendactivation/:email', emailController.sendActivation)
-router.get('/email/activation', emailController.activatedAccount)
+router.post('/sendactivation/:email', emailController.sendActivation)
+router.get('/activation', emailController.activatedAccount)
 
 module.exports = router
