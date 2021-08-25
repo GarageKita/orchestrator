@@ -9,7 +9,7 @@ const productRoute = require('./products')
 const bidRoute = require('./bids')
 const offerRoute = require('./offer')
 const emailRoute = require('./email')
-
+const dealRoute = require('./deals')
 // user
 router.post('/login', UserC.login)
 router.post('/register', UserC.register)
@@ -22,5 +22,7 @@ router.use('/bids', bidRoute)
 router.use('/offers', offerRoute)
 
 router.use('/email', emailRoute)
+
+router.use('/deals', dealRoute)
 
 module.exports = router
