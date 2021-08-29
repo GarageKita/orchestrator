@@ -166,21 +166,27 @@ class Controller {
         } catch (error) {
             next(error)
         }
+    }
 
-        // try {
-        //     axios.delete(url + '/offers/' + req.params.id, {
-        //         headers: {
-        //             access_token: req.headers.access_token
-        //         }
-        //     })
-        //     .then(({data, status}) => {
-        //         res.status(status).json(data)
-        //     }).catch(({response}) => {
-        //         res.status(response.status).json(response.data)
-        //     })
-        // } catch (error) {
-        //     next(error)
-        // }
+    static getOffer(req, res, next){
+        try {
+            let id = (req.params.id)?'/'+req.params.id:''
+            let headers = (req.headers.access_token)?{access_token: req.headers.access_token}:{}
+
+            axios({
+                method: 'get',
+                url: url + endPoint + '/checkoffer' + id,
+                data: req.body,
+                headers: headers
+              })
+            .then(({data, status}) => {
+                res.status(status).json(data)
+            }).catch(({response}) => {
+                res.status(response.status).json(response.data)
+            })
+        } catch (error) {
+            next(error)
+        }
     }
 }
 

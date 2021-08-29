@@ -148,6 +148,27 @@ class Controller {
         // }
     }
 
+    static async getBid(req, res, next){
+        try {
+            let id = (req.params.id)?'/'+req.params.id:''
+            let headers = (req.headers.access_token)?{access_token: req.headers.access_token}:{}
+
+            axios({
+                method: 'get',
+                url: url + '/bids/checkbid' + id,
+                data: req.body,
+                headers: headers
+              })
+            .then(({data, status}) => {
+                res.status(status).json(data)
+            }).catch(({response}) => {
+                res.status(response.status).json(response.data)
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
+
     static async delBid(req, res, next){
         try {
             let id = (req.params.id)?'/'+req.params.id:''

@@ -7,6 +7,7 @@ router.put('/:id', BidsC.putBid)
 router.get('/mybids', BidsC.getMyBids)
 router.get('/:id', BidsC.getProductBid)
 router.delete('/:id', BidsC.delBid)
+router.get('/checkbid/:id', BidsC.getBid)
 
 
 module.exports = router

@@ -11,12 +11,13 @@
     "ioredis": "^4.27.8"
   },
   "devDependencies": {
+    "jest": "^27.1.0",
     "supertest": "^6.1.6"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx nodemon",
-    "start": "node index.js"
+    "test": "set NODE_ENV=test&&jest --runInBand --forceExit --coverage",
+    "dev": "set NODE_ENV=development&&nodemon ./bin/server.js",
+    "start": "set NODE_ENV=production&&node ./bin/server.js"
   },
   "repository": {
     "type": "git",

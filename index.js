@@ -18,7 +18,8 @@ app.get('/', (req, res) => {
     res.status(200).json({message: 'Test Connection'})
 })
 
-app.listen(PORT, () => {
-    console.log('listening on port ' + PORT)
-})
+module.exports = app
+// app.listen(PORT, () => {
+//     console.log('listening on port ' + PORT)
+// })
 
