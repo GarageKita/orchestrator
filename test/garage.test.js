@@ -9,6 +9,7 @@ let productid;
 let offerid;
 let bidid;
 let requestid;
+let dealid;
 let uniqueCode = "ce84c7e0-0a07-11ec-afc9-4f5a62b1c826";
 
 describe("POST /register", () => {
@@ -96,7 +97,6 @@ describe("POST /login", () => {
         .set("Content-Type", "application/json")     
         .send({email: "garagekitah8@gmail.com", password: "123456"})
         .then(response => {
-            console.log('BERHASIL LOGIN')
             token = response.body.access_token
             expect(response.status).toBe(200);
             expect(response.body).toHaveProperty("access_token", expect.any(String))
@@ -1106,6 +1106,143 @@ describe("POST /ongkir/cost", () => {
         .then(response => {
             expect(response.status).toBe(200);
             expect(response.body).toHaveProperty("results", expect.any(Object))   
+        });
+    })
+})
+
+describe("POST /deals", () => {
+    it("Should create deals", async () => {
+        await request(app)
+        .post("/deals") 
+        .set("Content-Type", "application/json")
+        .set("access_token", token)     
+        .send({
+            "consumer_id": 1,
+            "product_id": productid,
+            "deal_price": 500000,
+            "deal_qty": 2
+        })
+        .then(response => {
+            expect(response.status).toBe(201);
+            expect(response.body).toHaveProperty("message", expect.any(String))   
+            dealid = response.body.data.id
+        });
+    })
+
+    it("Should create deals", async () => {
+        await request(app)
+        .post("/deals") 
+        .set("Content-Type", "application/json")
+        .set("access_token", token)     
+        .send({
+            "consumer_id": 1,
+            "product_id": productid,
+            "deal_price": 550000,
+            "deal_qty": 1
+        })
+        .then(response => {
+            expect(response.status).toBe(201);
+            expect(response.body).toHaveProperty("message", expect.any(String))   
+            id = response.body.data.id
+        });
+    })
+
+    it("Should not create offers and give response error", async () => {
+        await request(app)
+        .post("/deals") 
+        .set("Content-Type", "application/json")     
+        .send({
+            "consumer_id": 1,
+            "product_id": productid,
+            "deal_price": 550000,
+            "deal_qty": 1
+        })
+        .then(response => {
+            expect(response.status).toBe(401);
+            expect(response.body).toHaveProperty("message", expect.any(String))
+        });
+    })
+})
+
+// describe("PATCH /deals/:id", () => {
+//     it("Should update deal by id", async () => {
+//         await request(app)
+//         .patch("/deals/" + id) 
+//         .set("Content-Type", "application/json")
+//         .set("access_token", token)
+//         .send({
+//             "payment_status": "paid",
+//             "request_id": requestid
+//         })
+//         .then(response => {
+//             // expect(response.status).toBe(200);
+//             expect(response.status).toBe(response.status);
+//             // expect(response.body).toHaveProperty("message", expect.any(String))   
+//         });
+//     })
+
+//     it("Should not update deal and give response error", async () => {
+//         await request(app)
+//         .patch("/deals/" + id) 
+//         .set("Content-Type", "application/json")
+//         .then(response => {
+//             // expect(response.status).toBe(401);
+//             expect(response.status).toBe(response.status);
+//         });
+//     })
+// })
+
+describe("GET /deals", () => {
+    it("Should get all deals lis", async () => {
+        await request(app)
+        .get("/deals/" + id) 
+        .set("Content-Type", "application/json")
+        .set("access_token", token)
+        .then(response => {
+            expect(response.status).toBe(200);
+            expect(response.body).toHaveProperty("message", expect.any(String))   
+        });
+    })
+
+    it("Should get all deals by id", async () => {
+        await request(app)
+        .get("/deals/" + id) 
+        .set("Content-Type", "application/json")
+        .set("access_token", token)
+        .then(response => {
+            expect(response.status).toBe(200);
+            expect(response.body).toHaveProperty("message", expect.any(String))   
+        });
+    })
+
+    it("Should not get deals and give response error", async () => {
+        await request(app)
+        .get("/deals") 
+        .set("Content-Type", "application/json")
+        .then(response => {
+            expect(response.status).toBe(401);
+        });
+    })
+})
+
+describe("DELETE /deals", () => {
+    it("Should delete deals by id", async () => {
+        await request(app)
+        .delete("/deals/" + id) 
+        .set("Content-Type", "application/json")
+        .set("access_token", token)
+        .then(response => {
+            expect(response.status).toBe(200);
+            expect(response.body).toHaveProperty("message", expect.any(String))   
+        });
+    })
+
+    it("Should not delete deals and give response error", async () => {
+        await request(app)
+        .delete("/deals/" + id) 
+        .set("Content-Type", "application/json")
+        .then(response => {
+            expect(response.status).toBe(401);
         });
     })
 })

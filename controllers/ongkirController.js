@@ -20,7 +20,7 @@ class OngkirController{
     }
 
     static async getCity (req, res, next) {
-        console.log('masuk city')
+        // console.log('masuk city')
         let id = (req.query.id)?'id='+req.query.id:''
         let idProvince = (req.query.province)?'province='+req.query.province:''
         let headers = {}
@@ -46,7 +46,7 @@ class OngkirController{
     }
 
     static async countCost(req, res, next) {
-        console.log('masuk Count')
+        // console.log('masuk Count')
         let headers = {}
         
         axios({

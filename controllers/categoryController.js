@@ -8,8 +8,7 @@ const endPoint = '/categories'
 
 class Controller{
     static postCategory(req, res, next){
-        /* istanbul ignore next */
-        let id = (req.params.id)?'/'+req.params.id:''
+        let id = ''
         let headers = (req.headers.access_token)?{access_token: req.headers.access_token}:{}
 
         axios({
@@ -44,10 +43,8 @@ class Controller{
     }
 
     static delCategory(req, res, next){
-        /* istanbul ignore next */
-        let id = (req.params.id)?'/'+req.params.id:''
-        /* istanbul ignore next */
-        let headers = (req.headers.access_token)?{access_token: req.headers.access_token}:{}
+        let id = '/'+req.params.id
+        let headers = {access_token: req.headers.access_token}
 
         axios({
             method: 'delete',
@@ -57,19 +54,19 @@ class Controller{
             })
         .then(({data, status}) => {
             res.status(status).json(data)
-        }).catch(({response}) => {
-            /* istanbul ignore next */
-            res.status(response.status).json(response.data)
         })
+        // .catch(({response}) => {
+        //     /* istanbul ignore next */
+        //     res.status(response.status).json(response.data)
+        // })
     }
 
     static getCategory(req, res, next){
         /* istanbul ignore next */
         let id = (req.params.id)?'/'+req.params.id:''
-        /* istanbul ignore next */
-        let headers = (req.headers.access_token)?{access_token: req.headers.access_token}:{}
+        let headers = {} //(req.headers.access_token)?{access_token: req.headers.access_token}:{}
 
-        console.log(id, headers, url + endPoint + id, req.body)
+        // console.log(id, headers, url + endPoint + id, req.body)
         axios({
             method: 'get',
             url: url + endPoint + id,
@@ -78,9 +75,6 @@ class Controller{
             })
         .then(({data, status}) => {
             res.status(status).json(data)
-        }).catch(({response}) => {
-            /* istanbul ignore next */
-            res.status(response.status).json(response.data)
         })
     }
 }
