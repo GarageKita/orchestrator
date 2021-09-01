@@ -1,192 +1,107 @@
 'use strict'
 
 const axios = require("axios")
-const url = process.env.URL_MAIN_GARAGE_KITA
+/* istanbul ignore next */
+const url = (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development" ) ? 'http://localhost:3000' : process.env.URL_MAIN_GARAGE_KITA
 const endPoint = '/offers'
 class Controller {
     static async postOffer(req, res, next) {
-        try {
-            let id = (req.params.id)?'/'+req.params.id:''
-            let headers = (req.headers.access_token)?{access_token: req.headers.access_token}:{}
+        let id = '/'+req.params.id
+        let headers = (req.headers.access_token)?{access_token: req.headers.access_token}:{}
 
-            axios({
-                method: 'post',
-                url: url + endPoint + id,
-                data: req.body,
-                headers: headers
-              })
-            .then(({data, status}) => {
-                res.status(status).json(data)
-            }).catch(({response}) => {
-                res.status(response.status).json(response.data)
+        axios({
+            method: 'post',
+            url: url + endPoint + id,
+            data: req.body,
+            headers: headers
             })
-        } catch (error) {
-            next(error)
-        }
-
-        // try {
-        //     axios.post(url + '/offers/' + req.params.id, req.body, {
-        //         headers: {
-        //             access_token: req.headers.access_token
-        //         }
-        //     })
-        //     .then(({data, status}) => {
-        //         res.status(status).json(data)
-        //     }).catch(({response}) => {
-        //         res.status(response.status).json(response.data)
-        //     })
-        // } catch (error) {
-        //     next(error)
-        // }
+        .then(({data, status}) => {
+            res.status(status).json(data)
+        }).catch(({response}) => {
+            res.status(response.status).json(response.data)
+        })
     }
 
     static putOffer(req, res, next){
-        try {
-            let id = (req.params.id)?'/'+req.params.id:''
-            let headers = (req.headers.access_token)?{access_token: req.headers.access_token}:{}
+        let id = '/'+req.params.id
+        let headers = (req.headers.access_token)?{access_token: req.headers.access_token}:{}
 
-            axios({
-                method: 'put',
-                url: url + endPoint + id,
-                data: req.body,
-                headers: headers
-              })
-            .then(({data, status}) => {
-                res.status(status).json(data)
-            }).catch(({response}) => {
-                res.status(response.status).json(response.data)
+        axios({
+            method: 'put',
+            url: url + endPoint + id,
+            data: req.body,
+            headers: headers
             })
-        } catch (error) {
-            next(error)
-        }
-
-        // try {
-        //     axios.put(url + '/offers/' + req.params.id, req.body, {
-        //         headers: {
-        //             access_token: req.headers.access_token
-        //         }
-        //     })
-        //     .then(({data, status}) => {
-        //         res.status(status).json(data)
-        //     }).catch(({response}) => {
-        //         res.status(response.status).json(response.data)
-        //     })
-        // } catch (error) {
-        //     next(error)
-        // }
+        .then(({data, status}) => {
+            res.status(status).json(data)
+        }).catch(({response}) => {
+            res.status(response.status).json(response.data)
+        })
     }
     
     static getRequestOffer(req, res, next){
-        try {
-            let id = (req.params.id)?'/'+req.params.id:''
-            let headers = (req.headers.access_token)?{access_token: req.headers.access_token}:{}
+        let id = '/'+req.params.id
+        let headers = (req.headers.access_token)?{access_token: req.headers.access_token}:{}
 
-            axios({
-                method: 'get',
-                url: url + endPoint + id,
-                data: req.body,
-                headers: headers
-              })
-            .then(({data, status}) => {
-                res.status(status).json(data)
-            }).catch(({response}) => {
-                res.status(response.status).json(response.data)
+        axios({
+            method: 'get',
+            url: url + endPoint + id,
+            data: req.body,
+            headers: headers
             })
-        } catch (error) {
-            next(error)
-        }
-
-        // try {
-        //     axios.get(url + '/offers/' + req.params.id, {
-        //         headers: {
-        //             access_token: req.headers.access_token
-        //         }
-        //     })
-        //     .then(({data, status}) => {
-        //         res.status(status).json(data)
-        //     }).catch(({response}) => {
-        //         res.status(response.status).json(response.data)
-        //     })
-        // } catch (error) {
-        //     next(error)
-        // }
+        .then(({data, status}) => {
+            res.status(status).json(data)
+        }).catch(({response}) => {
+            res.status(response.status).json(response.data)
+        })
     }
+
     static getMyOffer(req, res, next){
-        try {
-            let id = (req.params.id)?'/'+req.params.id:''
-            let headers = (req.headers.access_token)?{access_token: req.headers.access_token}:{}
+        let id = ''
+        let headers = {access_token: req.headers.access_token}
 
-            axios({
-                method: 'get',
-                url: url + endPoint + '/myoffers' + id,
-                data: req.body,
-                headers: headers
-              })
-            .then(({data, status}) => {
-                res.status(status).json(data)
-            }).catch(({response}) => {
-                res.status(response.status).json(response.data)
+        axios({
+            method: 'get',
+            url: url + endPoint + '/myoffers' + id,
+            data: req.body,
+            headers: headers
             })
-        } catch (error) {
-            next(error)
-        }
-
-        // try {
-        //     axios.get(url + '/offers/myoffers', {
-        //         headers: {
-        //             access_token: req.headers.access_token
-        //         }
-        //     })
-        //     .then(({data, status}) => {
-        //         res.status(status).json(data)
-        //     }).catch(({response}) => {
-        //         res.status(response.status).json(response.data)
-        //     })
-        // } catch (error) {
-        //     next(error)
-        // }
+        .then(({data, status}) => {
+            res.status(status).json(data)
+        })
     }
 
     static delOffer(req, res, next){
-        try {
-            let id = (req.params.id)?'/'+req.params.id:''
-            let headers = (req.headers.access_token)?{access_token: req.headers.access_token}:{}
+        let id = '/'+req.params.id
+        let headers = (req.headers.access_token)?{access_token: req.headers.access_token}:{}
 
-            axios({
-                method: 'delete',
-                url: url + endPoint + id,
-                data: req.body,
-                headers: headers
-              })
-            .then(({data, status}) => {
-                res.status(status).json(data)
-            }).catch(({response}) => {
-                res.status(response.status).json(response.data)
+        axios({
+            method: 'delete',
+            url: url + endPoint + id,
+            data: req.body,
+            headers: headers
             })
-        } catch (error) {
-            next(error)
-        }
+        .then(({data, status}) => {
+            res.status(status).json(data)
+        }).catch(({response}) => {
+            res.status(response.status).json(response.data)
+        })
     }
 
     static getOffer(req, res, next){
-        try {
-            let id = (req.params.id)?'/'+req.params.id:''
-            let headers = (req.headers.access_token)?{access_token: req.headers.access_token}:{}
+        /* istanbul ignore next */
+        let id = (req.params.id)?'/'+req.params.id:''
+        let headers = {access_token: req.headers.access_token}
 
-            axios({
-                method: 'get',
-                url: url + endPoint + '/checkoffer' + id,
-                data: req.body,
-                headers: headers
-              })
-            .then(({data, status}) => {
-                res.status(status).json(data)
-            }).catch(({response}) => {
-                res.status(response.status).json(response.data)
+        axios({
+            method: 'get',
+            url: url + endPoint + '/checkoffer' + id,
+            data: req.body,
+            headers: headers
             })
-        } catch (error) {
-            next(error)
-        }
+        .then(({data, status}) => {
+            res.status(status).json(data)
+        })
     }
 }
 

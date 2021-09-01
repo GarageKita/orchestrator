@@ -1,7 +1,8 @@
 'use strict'
 
 const axios = require("axios")
-const url = process.env.URL_DEAL_TRANSACTION_GARAGE_KITA
+// const url = process.env.URL_DEAL_TRANSACTION_GARAGE_KITA
+const url = (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development" ) ? 'http://localhost:3001' : process.env.URL_DEAL_TRANSACTION_GARAGE_KITA
 const endPoint = '/deals'
 
 class Controller{

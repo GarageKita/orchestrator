@@ -16,6 +16,7 @@ const addressRoute = require('./address')
 router.post('/login', UserC.login)
 router.post('/register', UserC.register)
 router.put('/user/:id', UserC.putUser)
+router.patch('/user/makeadmin', UserC._TESTONLY_MAKEADMIN)
 
 router.use('/categories', categoryRoute)
 router.use('/requests', requestRoute)

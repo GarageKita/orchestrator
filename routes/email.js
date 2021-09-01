@@ -3,6 +3,7 @@ const router = express.Router()
 const emailController = require('../controllers/emailController.js')
 
 const handlerGetSlash = (req, res) => {
+    /* istanbul ignore next */
     res.send("Ini adalah API Untuk Auth dan Email")
 }
 

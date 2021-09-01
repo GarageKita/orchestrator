@@ -1,40 +1,40 @@
 'use strict'
 
 const axios = require("axios")
-const url = process.env.URL_3RD_PARTY_GARAGE_KITA;
+// const url = process.env.URL_3RD_PARTY_GARAGE_KITA;
+/* istanbul ignore next */
+const url = (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development") ? 'http://localhost:3002' : process.env.URL_3RD_PARTY_GARAGE_KITA
 
 class EmailController{
     static async sendActivation(req, res, next) {
         // router.post('/email/sendactivation/:email', emailController.sendActivation)
-        console.log('masuk')
         let emailKirim = req.params.email
-
-        try {
+        // try {
             axios.post(url + '/email/sendactivation/' + emailKirim)
             .then(({data, status}) => {
                 res.status(status).json(data)
             }).catch(({response}) => {
                 res.status(response.status).json(response.data)
             })
-        } catch (error) {
-            next(error)
-        }
+        // } catch (error) {
+        //     next(error)
+        // }
     }
 
     static async activatedAccount (req, res, next) {
         // router.get('/email/activation', emailController.activatedAccount)
+
         let activationCode = req.query.code;
-        console.log('masuk2')
-        try {
+        // try {
             axios.get(url + '/email/activation/?code=' + activationCode)
             .then(({data, status}) => {
                 res.status(status).json(data)
             }).catch(({response}) => {
                 res.status(response.status).json(response.data)
             })
-        } catch (error) {
-            next(error)
-        }
+        // } catch (error) {
+        //     next(error)
+        // }
     }
 }
 
