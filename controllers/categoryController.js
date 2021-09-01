@@ -3,7 +3,7 @@
 const axios = require("axios")
 // const url = process.env.URL_MAIN_GARAGE_KITA
 /* istanbul ignore next */
-const url = (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development" ) ? 'http://localhost:3000' : process.env.URL_MAIN_GARAGE_KITAyyyy
+const url = (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development" ) ? 'http://localhost:3000' : process.env.URL_MAIN_GARAGE_KITA
 const endPoint = '/categories'
 
 class Controller{
