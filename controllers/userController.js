@@ -3,6 +3,8 @@
 const axios = require("axios")
 /* istanbul ignore next */
 const url = (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development") ? 'http://localhost:3000' : process.env.URL_MAIN_GARAGE_KITA
+/* istanbul ignore next */
+const url3rd = (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development") ? 'http://localhost:3002' : process.env.URL_3RD_PARTY_GARAGE_KITA
 
 class Controller{
     static async login(req, res, next){
@@ -49,6 +51,19 @@ class Controller{
             url: url + '/user/makeadmin',
             data: req.body,
             headers: headers
+            })
+        .then(({data, status}) => {
+            res.status(status).json(data)
+        }).catch(({response}) => {
+            res.status(response.status).json(response.data)
+        })
+    }
+
+    static async loginGoogle(req, res, next) {
+        axios({
+            method: 'post',
+            url: url3rd + '/oauthgoogle/login-google',
+            data: req.body,
             })
         .then(({data, status}) => {
             res.status(status).json(data)
